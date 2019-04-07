@@ -24,6 +24,7 @@ class App extends Component {
         max_row_len = element[0];
       }
     });
+    
     for (let row = 0; row < max_row_len; row++) {
       for (let block = 0; block < arr.length; block++) {
         let block_col = arr[block][1];
