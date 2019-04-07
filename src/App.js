@@ -7,24 +7,34 @@ class App extends Component {
     super(props);
 
     this.state = {
-      documents: []
+
     }
   }
 
   render() {
-    var arr = [[2, 3], [3, 4], [3, 2], [4, 3]];
+    var newArr = [[3, 2], [4, 3], [2, 3], [3, 4]];
     var passengerCount = 30;
+
     var max_row_len = 0;
     var aisle_seat_coord = [];
     var window_seat_coord = [];
     var center_seat_coord = [];
 
+    //Swap elements ow inner arrays
+    var arr = []
+    for (let i = 0; i < newArr.length; i++) {
+      let block = [];
+      block.push(newArr[i][1]);
+      block.push(newArr[i][0]);
+      arr.push(block);
+    }
+    //Get maximum number of rows
     arr.forEach(function (element) {
       if (element[0] > max_row_len) {
         max_row_len = element[0];
       }
     });
-    
+
     for (let row = 0; row < max_row_len; row++) {
       for (let block = 0; block < arr.length; block++) {
         let block_col = arr[block][1];
@@ -32,7 +42,7 @@ class App extends Component {
 
         // if sector still has rows
         if (row < block_row) {
-          // leftmost sector
+          // leftmost block
           if (block === 0) {
             aisle_seat_coord.push({ block: block, row: row, col: block_col - 1 });
             window_seat_coord.push({ block: block, row: row, col: 0 });
@@ -40,6 +50,7 @@ class App extends Component {
               center_seat_coord.push({ block: block, row: row, col: j })
             }
           }
+          //rigt most block
           else if (block === arr.length - 1) {
             aisle_seat_coord.push({ block: block, row: row, col: 0 });
             window_seat_coord.push({ block: block, row: row, col: block_col - 1 });
@@ -47,6 +58,7 @@ class App extends Component {
               center_seat_coord.push({ block: block, row: row, col: j })
             }
           }
+          //center block
           else {
             aisle_seat_coord.push({ block: block, row: row, col: 0 });
             aisle_seat_coord.push({ block: block, row: row, col: block_col - 1 });
@@ -58,6 +70,7 @@ class App extends Component {
         }
       }
     }
+    //add seat number to each cordinate
     var final_array_n = [];
     var final_array = [...aisle_seat_coord, ...window_seat_coord, ...center_seat_coord]
     for (let i = 0; i < final_array.length; i++) {
@@ -70,6 +83,7 @@ class App extends Component {
 
       }
     }
+    
     var final_block_array = [];
     for (var k = 0; k < arr.length; k++) {
       var block = [];

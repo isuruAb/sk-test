@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Seat from './Seat'
-class Row extends React.Component {
+class Row extends Component {
     render() {
   
       var doc = []

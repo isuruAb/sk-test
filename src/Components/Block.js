@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Row from './Row'
 
-class Block extends React.Component {
+class Block extends Component {
     render() {
   
   
