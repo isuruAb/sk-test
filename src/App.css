@@ -2,10 +2,14 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 1vw;
+  background: #000;
+  margin: 1vw;
 }
 .row{
   flex-direction: column;
+  min-width: 12vw;
+  background: #000;
+  margin: 0 auto;
 }
 .seat{
   display: flex;
@@ -15,11 +19,13 @@
   float: left;
   flex: 1;
 }
-.airplane{}
+body{
+  background: #f8f8f8;
+
+}
 .block_wrapper{
   display: flex;
-  /* width: 990px; */
   background: #f8f8f8;
   align-content: center;
-  margin: 0 auto
+  margin: 10px auto;
 }
