@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
 import './App.css';
 import Block from './Components/Block'
+import TextField from '@material-ui/core/TextField';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-
+      passengerCount: ''
     }
   }
-
+  editPassenger(e) {
+    this.setState({ passengerCount: e.target.value })
+  }
   render() {
-    var newArr = [[3, 2], [4, 3], [2, 3], [3, 4]];
-    var passengerCount = 30;
+    var firstArr = [[3, 2], [4, 3], [2, 3], [3, 4]];
+    var passengerCount = this.state.passengerCount - 1;
 
     var max_row_len = 0;
     var aisle_seat_coord = [];
     var window_seat_coord = [];
     var center_seat_coord = [];
+    let allSeats = 0;
 
+    //Check seat count and passenger count and give worning
+    for (let i = 0; i < firstArr.length; i++) {
+      allSeats = allSeats + (firstArr[i][0] * firstArr[i][1]);
+    }
+    if (this.state.passengerCount > allSeats) {
+      alert("Already full")
+    }
     //Swap elements ow inner arrays
     var arr = []
-    for (let i = 0; i < newArr.length; i++) {
+    for (let i = 0; i < firstArr.length; i++) {
       let block = [];
-      block.push(newArr[i][1]);
-      block.push(newArr[i][0]);
+      block.push(firstArr[i][1]);
+      block.push(firstArr[i][0]);
       arr.push(block);
     }
     //Get maximum number of rows
@@ -83,7 +94,7 @@ class App extends Component {
 
       }
     }
-    
+
     var final_block_array = [];
     for (var k = 0; k < arr.length; k++) {
       var block = [];
@@ -98,14 +109,25 @@ class App extends Component {
 
     var blocksArr = []
     for (let block = 0; block < arr.length; block++) {
-      blocksArr.push(Block)
+      blocksArr.push(<Block key={block} blocks={arr[block]} seat_details={final_block_array[block]} />
+        )
     }
-    const blocks = blocksArr.map((Element, index) => {
-      return <Element key={index} blocks={arr[index]} seat_details={final_block_array[index]} />
-    });
     return <div className="airplane">
+
+      <TextField
+        label="Number of Passengers"
+        value={this.state.passengerCount}
+        onChange={(e) => this.editPassenger(e)}
+        margin="normal"
+        type="number"
+        className="passenger_no"
+        style={{ width: '25vw', margin: '20px auto', display: 'block' }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
       <div className="block_wrapper">
-        {blocks}
+        {blocksArr}
       </div>
     </div>
   }

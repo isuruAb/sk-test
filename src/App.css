@@ -29,3 +29,11 @@ body{
   align-content: center;
   margin: 10px auto;
 }
+.passenger_no{
+  width: 25vw;
+  margin: 10px auto;
+  display: block;
+}
+.airplane{
+  width: 100%
+}
